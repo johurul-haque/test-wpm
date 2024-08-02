@@ -11,3 +11,10 @@ Now I'm trying to **clear the input field** on clicking the space bar and save t
 **solution**:
 - using another `useState` for the input value. Resetting it after the space bar clicked but still the single character space remains. 
 - so I'm passing `inputValue.trim()` in the input field value prop and it's removing the extra space.
+
+*02 August 2024*
+
+Day 3 of this project. Implemented the reset button so far. Setting all of the states to its initial state.
+
+**issues**
+- There's multiple *(4)* state declarations in the file. 

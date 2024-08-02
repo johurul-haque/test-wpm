@@ -1,8 +1,13 @@
-import { useEffect, useState } from 'react';
+import { SetStateActionType } from '@/types/set-state-action';
+import { useEffect } from 'react';
 
-export function Timer({ startTimer }: { startTimer: boolean }) {
-  const [countDown, setCountDown] = useState(60);
+type PropsType = {
+  startTimer: boolean;
+  setCountDown: SetStateActionType<number>;
+  countDown: number;
+};
 
+export function Timer({ startTimer, setCountDown, countDown }: PropsType) {
   useEffect(() => {
     if (startTimer && countDown) {
       const intervalId = setInterval(() => {
@@ -13,7 +18,8 @@ export function Timer({ startTimer }: { startTimer: boolean }) {
         clearInterval(intervalId);
       };
     }
-  }, [countDown, startTimer]);
+  }, [countDown, startTimer, setCountDown]);
+
   return (
     <time className="border rounded px-3.5 flex items-center bg-gray-200">
       {countDown}
