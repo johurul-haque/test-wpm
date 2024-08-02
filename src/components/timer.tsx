@@ -21,7 +21,7 @@ export function Timer({ startTimer, setCountDown, countDown }: PropsType) {
   }, [countDown, startTimer, setCountDown]);
 
   return (
-    <time className="border rounded px-3.5 flex items-center bg-gray-200">
+    <time className="rounded px-3.5 flex items-center bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50">
       {countDown}
     </time>
   );

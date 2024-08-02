@@ -9,7 +9,7 @@ export function App() {
   const [startTimer, setStartTimer] = useState(false);
 
   const [inputValue, setInputValue] = useState('');
-  const [result, setResult] = useState<Array<string>>([]);
+  const [, setResult] = useState<Array<string>>([]);
 
   return (
     <main className="container py-12">
@@ -44,6 +44,7 @@ export function App() {
         />
 
         <Button
+          title="Restart test"
           onClick={() => {
             setStartTimer(false);
             setCountDown(59);
