@@ -1,27 +1,23 @@
-import { SetStateActionType } from '@/types/set-state-action';
+import { useStore } from '@/store';
 import { useEffect } from 'react';
 
-type PropsType = {
-  startTimer: boolean;
-  setCountDown: SetStateActionType<number>;
-  countDown: number;
-};
+export function Timer() {
+  const { countDown, startCountDown } = useStore();
 
-export function Timer({ startTimer, setCountDown, countDown }: PropsType) {
   useEffect(() => {
-    if (startTimer && countDown) {
+    if (countDown && countDown < 60) {
       const intervalId = setInterval(() => {
-        setCountDown((t) => t - 1);
+        startCountDown();
       }, 1000);
 
       return () => {
         clearInterval(intervalId);
       };
     }
-  }, [countDown, startTimer, setCountDown]);
+  }, [countDown, startCountDown]);
 
   return (
-    <time className="rounded px-3.5 flex items-center bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50">
+    <time className="rounded px-3.5 flex items-center bg-neutral-200/80 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50">
       {countDown}
     </time>
   );

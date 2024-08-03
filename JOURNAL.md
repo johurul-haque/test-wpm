@@ -18,3 +18,6 @@ Day 3 of this project. Implemented the reset button so far. Setting all of the s
 
 **challenges**
 - There's multiple *(4)* state declarations in the file. 
+
+**workarounds**
+- If the state declaration increases will shift to using `zustand`

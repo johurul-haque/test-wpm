@@ -23,7 +23,9 @@ export function ResultCard({ wordsCompleted }: { wordsCompleted: number }) {
           </div>
 
           <div className="flex justify-between">
-            <dt className="text-neutral-500 dark:text-neutral-400">mistakes</dt>
+            <dt className="text-neutral-500 dark:text-neutral-400">
+              wrong words
+            </dt>
             <dd>12</dd>
           </div>
         </dl>

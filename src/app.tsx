@@ -1,64 +1,49 @@
 import { RotateCcwIcon } from 'lucide-react';
-import { useState } from 'react';
 import { ResultCard } from './components/result-card';
 import { Timer } from './components/timer';
 import { Button } from './components/ui/button';
 import { Input } from './components/ui/input';
 import { WordBox } from './components/words-box';
+import { useStore } from './store';
 
 export function App() {
-  const [countDown, setCountDown] = useState(60);
-  const [startTimer, setStartTimer] = useState(false);
-
-  const [inputValue, setInputValue] = useState('');
-  const [result, addResult] = useState<Array<string>>([]);
+  const store = useStore();
 
   return (
     <main className="container py-12 font-mono">
-      {!!countDown && <WordBox activeIndex={result.length} />}
+      {!!store.countDown && <WordBox activeIndex={store.result.length} />}
 
       <div className="flex gap-2 justify-center max-w-md mx-auto">
-        <Timer
-          setCountDown={setCountDown}
-          countDown={countDown}
-          startTimer={startTimer}
-        />
+        <Timer />
 
         <Input
           type="text"
           className="w-full focus-visible:ring-0 text-lg"
           autoFocus
-          value={inputValue}
+          value={store.inputValue}
           onKeyDown={(e) => {
-            if (e.key === ' ' && countDown) {
+            if (e.key === ' ' && store.countDown) {
               const { value } = e.currentTarget;
 
               if (value) {
-                addResult((prev) => [...prev, value]);
+                store.addResult(value);
               }
 
-              setInputValue('');
+              store.setInputValue('');
             }
           }}
           onChange={(e) => {
-            if (!startTimer) {
-              setStartTimer(true);
+            if (store.countDown === 60) {
+              store.startCountDown();
             }
 
-            const { value } = e.target;
-
-            setInputValue(countDown ? value.trim() : value);
+            store.setInputValue(e.target.value);
           }}
         />
 
         <Button
           title="Restart test"
-          onClick={() => {
-            setStartTimer(false);
-            setCountDown(60);
-            setInputValue('');
-            addResult([]);
-          }}
+          onClick={store.reset}
           size={'icon'}
           className="px-3"
         >
@@ -67,7 +52,7 @@ export function App() {
         </Button>
       </div>
 
-      {!countDown && <ResultCard wordsCompleted={result.length} />}
+      {!store.countDown && <ResultCard wordsCompleted={store.result.length} />}
     </main>
   );
 }
