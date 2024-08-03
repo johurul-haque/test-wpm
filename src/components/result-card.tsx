@@ -5,28 +5,31 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { useStore } from '@/store';
 
-export function ResultCard({ wordsCompleted }: { wordsCompleted: number }) {
+export function ResultCard() {
+  const { activeIndex, WPM, incorrectWordsIndex } = useStore();
+
+  const accuracy = (WPM / activeIndex) * 100 || 0;
+
   return (
     <Card className="max-w-xs mx-auto my-8">
       <CardHeader className="text-center">
-        <CardTitle>{wordsCompleted} wpm</CardTitle>
-        <CardDescription>
-          your typing speed {wordsCompleted > 70 && '🔥'}
-        </CardDescription>
+        <CardTitle>{WPM} wpm</CardTitle>
+        <CardDescription>your typing speed {WPM > 70 && '🔥'}</CardDescription>
       </CardHeader>
       <CardContent>
         <dl className="space-y-2">
           <div className="flex justify-between">
             <dt className="text-neutral-500 dark:text-neutral-400">accuracy</dt>
-            <dd>96%</dd>
+            <dd>{accuracy.toFixed(2)} %</dd>
           </div>
 
           <div className="flex justify-between">
             <dt className="text-neutral-500 dark:text-neutral-400">
-              wrong words
+              incorrect words
             </dt>
-            <dd>12</dd>
+            <dd>{incorrectWordsIndex.length}</dd>
           </div>
         </dl>
       </CardContent>

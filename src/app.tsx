@@ -11,7 +11,7 @@ export function App() {
 
   return (
     <main className="container py-12 font-mono">
-      {!!store.countDown && <WordBox activeIndex={store.result.length} />}
+      {!!store.countDown && <WordBox />}
 
       <div className="flex gap-2 justify-center max-w-md mx-auto">
         <Timer />
@@ -26,7 +26,15 @@ export function App() {
               const { value } = e.currentTarget;
 
               if (value) {
-                store.addResult(value);
+                store.nextIndex();
+              }
+
+              const isCorrectWord = store.words[store.activeIndex] === value;
+
+              if (isCorrectWord) {
+                store.increaseWPM();
+              } else {
+                store.setIncorrectWordsIndex(store.activeIndex);
               }
 
               store.setInputValue('');
@@ -37,7 +45,14 @@ export function App() {
               store.startCountDown();
             }
 
-            store.setInputValue(e.target.value);
+            const { value } = e.target;
+
+            const isCorrectWord = store.words[store.activeIndex].startsWith(
+              value.trim()
+            );
+
+            store.setIsCurrentWordIncorrect(!isCorrectWord);
+            store.setInputValue(value);
           }}
         />
 
@@ -52,7 +67,7 @@ export function App() {
         </Button>
       </div>
 
-      {!store.countDown && <ResultCard wordsCompleted={store.result.length} />}
+      {!store.countDown && <ResultCard />}
     </main>
   );
 }

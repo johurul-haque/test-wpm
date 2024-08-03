@@ -1,28 +1,56 @@
+import { WORDS } from '@/assets/data';
+import { shuffle } from '@/lib/shuffle';
 import { create } from 'zustand';
 
 const initialState = {
+  WPM: 0,
   countDown: 60,
+  activeIndex: 0,
   inputValue: '',
-  result: [] as string[],
+  words: shuffle(WORDS),
+  isCurrentWordIncorrect: false,
+  incorrectWordsIndex: [] as number[],
 };
 
 type Actions = {
+  increaseWPM: () => void;
+  nextIndex: () => void;
   startCountDown: () => void;
   setInputValue: (value: string) => void;
-  addResult: (value: string) => void;
+  setIsCurrentWordIncorrect: (value: boolean) => void;
+  setIncorrectWordsIndex: (value: number) => void;
   reset: () => void;
 };
 
 export const useStore = create<typeof initialState & Actions>((set) => ({
   ...initialState,
-  startCountDown: () => set((state) => ({ countDown: state.countDown - 1 })),
+  startCountDown: () => {
+    set((state) => ({ countDown: state.countDown - 1 }));
+  },
   setInputValue: (value) => {
     set((state) => ({ inputValue: state.countDown ? value.trim() : value }));
   },
-  addResult: (value) => {
+  increaseWPM: () => {
     set((state) => ({
-      result: [...state.result, value],
+      WPM: state.WPM + 1,
     }));
   },
-  reset: () => set(initialState),
+  nextIndex: () => {
+    set((state) => {
+      if (state.activeIndex < state.words.length) {
+        return { activeIndex: state.activeIndex + 1 };
+      }
+
+      return state;
+    });
+  },
+  setIsCurrentWordIncorrect: (value) => {
+    set({ isCurrentWordIncorrect: value });
+  },
+  setIncorrectWordsIndex: (value) => {
+    set((state) => ({
+      incorrectWordsIndex: [...state.incorrectWordsIndex, value],
+    }));
+  },
+  reset: () => set({ ...initialState, words: shuffle(WORDS) }),
 }));
