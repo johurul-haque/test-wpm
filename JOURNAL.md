@@ -21,3 +21,10 @@ Day 3 of this project. Implemented the reset button so far. Setting all of the s
 
 **workarounds**
 - If the state declaration increases will shift to using `zustand`
+
+*03 August 2024*
+
+Day 4 of the project. Using `zustand`; handling incorrect word states, mistakes, and showing accuracy percentages.
+
+**challenges**
+- Having the active word at the top of word-box

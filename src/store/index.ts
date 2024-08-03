@@ -4,7 +4,7 @@ import { create } from 'zustand';
 
 const initialState = {
   WPM: 0,
-  countDown: 60,
+  timeLeft: 60,
   activeIndex: 0,
   inputValue: '',
   words: shuffle(WORDS),
@@ -25,10 +25,10 @@ type Actions = {
 export const useStore = create<typeof initialState & Actions>((set) => ({
   ...initialState,
   startCountDown: () => {
-    set((state) => ({ countDown: state.countDown - 1 }));
+    set((state) => ({ timeLeft: state.timeLeft - 1 }));
   },
   setInputValue: (value) => {
-    set((state) => ({ inputValue: state.countDown ? value.trim() : value }));
+    set((state) => ({ inputValue: state.timeLeft ? value.trim() : value }));
   },
   increaseWPM: () => {
     set((state) => ({

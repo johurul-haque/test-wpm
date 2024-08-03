@@ -11,7 +11,7 @@ export function App() {
 
   return (
     <main className="container py-12 font-mono">
-      {!!store.countDown && <WordBox />}
+      {!!store.timeLeft && <WordBox />}
 
       <div className="flex gap-2 justify-center max-w-md mx-auto">
         <Timer />
@@ -22,7 +22,7 @@ export function App() {
           autoFocus
           value={store.inputValue}
           onKeyDown={(e) => {
-            if (e.key === ' ' && store.countDown) {
+            if (e.key === ' ' && store.timeLeft) {
               const { value } = e.currentTarget;
 
               if (value) {
@@ -41,7 +41,7 @@ export function App() {
             }
           }}
           onChange={(e) => {
-            if (store.countDown === 60) {
+            if (store.timeLeft === 60) {
               store.startCountDown();
             }
 
@@ -67,7 +67,7 @@ export function App() {
         </Button>
       </div>
 
-      {!store.countDown && <ResultCard />}
+      {!store.timeLeft && <ResultCard />}
     </main>
   );
 }

@@ -2,10 +2,10 @@ import { useStore } from '@/store';
 import { useEffect } from 'react';
 
 export function Timer() {
-  const { countDown, startCountDown } = useStore();
+  const { timeLeft, startCountDown } = useStore();
 
   useEffect(() => {
-    if (countDown && countDown < 60) {
+    if (timeLeft && timeLeft < 60) {
       const intervalId = setInterval(() => {
         startCountDown();
       }, 1000);
@@ -14,11 +14,11 @@ export function Timer() {
         clearInterval(intervalId);
       };
     }
-  }, [countDown, startCountDown]);
+  }, [timeLeft, startCountDown]);
 
   return (
     <time className="rounded px-3.5 flex items-center bg-neutral-200/80 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50">
-      {countDown}
+      {timeLeft}
     </time>
   );
 }
