@@ -10,7 +10,7 @@ export function App() {
   const store = useStore();
 
   return (
-    <main className="container py-12 font-mono">
+    <main key={store.resetKey} className="container py-12 font-mono">
       {!!store.timeLeft && <WordBox />}
 
       <div className="flex gap-2 justify-center max-w-md mx-auto">

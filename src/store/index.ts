@@ -10,6 +10,7 @@ const initialState = {
   words: shuffle(WORDS),
   isCurrentWordIncorrect: false,
   incorrectWordsIndex: [] as number[],
+  resetKey: 0,
 };
 
 type Actions = {
@@ -25,19 +26,20 @@ type Actions = {
 export const useStore = create<typeof initialState & Actions>((set) => ({
   ...initialState,
   startCountDown: () => {
-    set((state) => ({ timeLeft: state.timeLeft - 1 }));
+    set((state) => ({ timeLeft: --state.timeLeft }));
   },
   setInputValue: (value) => {
     set((state) => ({ inputValue: state.timeLeft ? value.trim() : value }));
   },
   increaseWPM: () => {
     set((state) => ({
-      WPM: state.WPM + 1,
+      WPM: ++state.WPM,
     }));
   },
   nextIndex: () => {
     set((state) => {
       if (state.activeIndex < state.words.length) {
+        //? Don't use ++ operator here. Causes weirdness.
         return { activeIndex: state.activeIndex + 1 };
       }
 
@@ -52,5 +54,10 @@ export const useStore = create<typeof initialState & Actions>((set) => ({
       incorrectWordsIndex: [...state.incorrectWordsIndex, value],
     }));
   },
-  reset: () => set({ ...initialState, words: shuffle(WORDS) }),
+  reset: () =>
+    set((state) => ({
+      ...initialState,
+      words: shuffle(WORDS),
+      resetKey: ++state.resetKey,
+    })),
 }));
