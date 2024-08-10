@@ -16,7 +16,7 @@ const initialState = {
 type Actions = {
   increaseWPM: () => void;
   nextIndex: () => void;
-  startCountDown: () => void;
+  countDown: () => void;
   setInputValue: (value: string) => void;
   setIsCurrentWordIncorrect: (value: boolean) => void;
   setIncorrectWordsIndex: (value: number) => void;
@@ -25,7 +25,7 @@ type Actions = {
 
 export const useStore = create<typeof initialState & Actions>((set) => ({
   ...initialState,
-  startCountDown: () => {
+  countDown: () => {
     set((state) => ({ timeLeft: --state.timeLeft }));
   },
   setInputValue: (value) => {

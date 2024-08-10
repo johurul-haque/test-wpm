@@ -42,7 +42,7 @@ export function App() {
           }}
           onChange={(e) => {
             if (store.timeLeft === 60) {
-              store.startCountDown();
+              store.countDown();
             }
 
             const { value } = e.target;

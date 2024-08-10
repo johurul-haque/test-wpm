@@ -28,3 +28,9 @@ Day 4 of the project. Using `zustand`; handling incorrect word states, mistakes,
 
 **challenges**
 - Having the active word at the top of word-box
+
+*04 August 2024*
+
+*challenges*
+- Preventing word box component from re-rendering on timer change.
+- Preventing any other unnecessary re-rendering.
