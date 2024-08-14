@@ -31,6 +31,17 @@ Day 4 of the project. Using `zustand`; handling incorrect word states, mistakes,
 
 *04 August 2024*
 
-*challenges*
+**challenges**
 - Preventing word box component from re-rendering on timer change.
 - Preventing any other unnecessary re-rendering.
+
+*06 August 2024*
+
+**challenges**
+- Active word should be in the second row after the first row of words finishes when the test starts.
+  - First I need to determine in which number of rows the active word is in.
+  - After the current row of words finishes the previous row of words should be removed.
+
+**workarounds**
+- To determine in which number of rows the active word is in I'm comparing the vertical positions of adjacent elements. When a significant change in vertical position is detected, it means the the element has moved to a new row.
+- Now to delete the first row every time the active word moves to a new row. But deleting causes inconsistency in the states. So instead of deleting I'm hiding the elements of the first row.
