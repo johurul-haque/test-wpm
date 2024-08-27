@@ -1,45 +1,37 @@
-import { WORDS } from '@/assets/data';
-import { shuffle } from '@/lib/shuffle';
-import { create } from 'zustand';
+import { WORDS } from "@/assets/data";
+import { shuffle } from "@/lib/shuffle";
+import { create } from "zustand";
 
 const initialState = {
-  WPM: 0,
+  time: 60,
   timeLeft: 60,
+  correctWordsTyped: 0,
   activeIndex: 0,
-  inputValue: '',
+  inputValue: "",
   words: shuffle(WORDS),
   isCurrentWordIncorrect: false,
   incorrectWordsIndex: [] as number[],
   resetKey: 0,
 };
 
-type Actions = {
-  increaseWPM: () => void;
-  nextIndex: () => void;
-  countDown: () => void;
-  setInputValue: (value: string) => void;
-  setIsCurrentWordIncorrect: (value: boolean) => void;
-  setIncorrectWordsIndex: (value: number) => void;
-  reset: () => void;
-};
-
 export const useStore = create<typeof initialState & Actions>((set) => ({
   ...initialState,
+  setTime: (value) => set({ time: value, timeLeft: value }),
   countDown: () => {
     set((state) => ({ timeLeft: --state.timeLeft }));
   },
   setInputValue: (value) => {
     set((state) => ({ inputValue: state.timeLeft ? value.trim() : value }));
   },
-  increaseWPM: () => {
+  increaseWordsTyped: () => {
     set((state) => ({
-      WPM: ++state.WPM,
+      correctWordsTyped: ++state.correctWordsTyped,
     }));
   },
   nextIndex: () => {
     set((state) => {
       if (state.activeIndex < state.words.length) {
-        //? Don't use ++ operator here. Causes weirdness.
+        //? Don't use ++ operator here. Causes' weirdness.
         return { activeIndex: state.activeIndex + 1 };
       }
 
@@ -57,7 +49,20 @@ export const useStore = create<typeof initialState & Actions>((set) => ({
   reset: () =>
     set((state) => ({
       ...initialState,
+      time: state.time,
+      timeLeft: state.time,
       words: shuffle(WORDS),
       resetKey: ++state.resetKey,
     })),
 }));
+
+type Actions = {
+  setTime: (value: number) => void;
+  increaseWordsTyped: () => void;
+  nextIndex: () => void;
+  countDown: () => void;
+  setInputValue: (value: string) => void;
+  setIsCurrentWordIncorrect: (value: boolean) => void;
+  setIncorrectWordsIndex: (value: number) => void;
+  reset: () => void;
+};

@@ -4,19 +4,21 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { useStore } from '@/store';
+} from "@/components/ui/card";
+import { useStore } from "@/store";
 
 export function ResultCard() {
-  const { activeIndex, WPM, incorrectWordsIndex } = useStore();
+  const { activeIndex, correctWordsTyped, incorrectWordsIndex, time } =
+    useStore();
 
-  const accuracy = (WPM / activeIndex) * 100 || 0;
+  const WPM = (correctWordsTyped / time) * 60;
+  const accuracy = (correctWordsTyped / activeIndex) * 100 || 0;
 
   return (
     <Card className="max-w-xs mx-auto my-8">
       <CardHeader className="text-center">
         <CardTitle>{WPM} wpm</CardTitle>
-        <CardDescription>your typing speed {WPM > 70 && '🔥'}</CardDescription>
+        <CardDescription>your typing speed {WPM > 70 && "🔥"}</CardDescription>
       </CardHeader>
       <CardContent>
         <dl className="space-y-2">

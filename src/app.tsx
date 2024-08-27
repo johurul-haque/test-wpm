@@ -1,10 +1,10 @@
-import { RotateCcwIcon } from 'lucide-react';
-import { ResultCard } from './components/result-card';
-import { Timer } from './components/timer';
-import { Button } from './components/ui/button';
-import { Input } from './components/ui/input';
-import { WordBox } from './components/words-box';
-import { useStore } from './store';
+import { RotateCcwIcon } from "lucide-react";
+import { ResultCard } from "./components/result-card";
+import { Timer } from "./components/timer";
+import { Button } from "./components/ui/button";
+import { Input } from "./components/ui/input";
+import { WordBox } from "./components/words-box";
+import { useStore } from "./store";
 
 export function App() {
   const store = useStore();
@@ -22,7 +22,7 @@ export function App() {
           autoFocus
           value={store.inputValue}
           onKeyDown={(e) => {
-            if (e.key === ' ' && store.timeLeft) {
+            if (e.key === " " && store.timeLeft) {
               const { value } = e.currentTarget;
 
               if (value) {
@@ -32,23 +32,23 @@ export function App() {
               const isCorrectWord = store.words[store.activeIndex] === value;
 
               if (isCorrectWord) {
-                store.increaseWPM();
+                store.increaseWordsTyped();
               } else {
                 store.setIncorrectWordsIndex(store.activeIndex);
               }
 
-              store.setInputValue('');
+              store.setInputValue("");
             }
           }}
           onChange={(e) => {
-            if (store.timeLeft === 60) {
+            if (store.timeLeft === store.time) {
               store.countDown();
             }
 
             const { value } = e.target;
 
             const isCorrectWord = store.words[store.activeIndex].startsWith(
-              value.trim()
+              value.trim(),
             );
 
             store.setIsCurrentWordIncorrect(!isCorrectWord);
@@ -59,7 +59,7 @@ export function App() {
         <Button
           title="Restart test"
           onClick={store.reset}
-          size={'icon'}
+          size={"icon"}
           className="px-3"
         >
           <span className="sr-only">Restart test</span>
