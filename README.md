@@ -1,5 +1,7 @@
 # Test WPM
-Typing speed checker inspired by 10fastfingers.
+Typing speed checker inspired by 10fastfingers. [Test your speed](https://test-wpm.vercel.app/)
+
+https://github.com/user-attachments/assets/59966a54-13b8-48fe-9898-b87acc10a99e
 
 ## Technologies
 - React with Vite: There wasn't any dynamic content so to make the single page static, and initial load faster, I used the `vite-react-ssg` package
