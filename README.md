@@ -1,18 +1,20 @@
-# Test WPM
-Typing speed checker inspired by 10fastfingers. [Test your speed](https://test-wpm.vercel.app/)
+# test wpm
+Typing test platform inspired by 10fastfingers.
+
+https://test-wpm.vercel.app/
 
 https://github.com/user-attachments/assets/59966a54-13b8-48fe-9898-b87acc10a99e
 
 ## Technologies
-- React with Vite: There wasn't any dynamic content so to make the single page static, and initial load faster, I used the `vite-react-ssg` package
+- **React with Vite:** There wasn't any dynamic content so to make the single page static, and initial load faster, I used the `vite-react-ssg` package
 for static site generation.
-- Zustand: The development involved managing a lot of states; e.g. errors, correct words typed, input value, current word, time left etc. The application was small to use Redux but complex enough to hop for a state management library like Zustand.
-- Typescript and Tailwind CSS
+- **Zustand:** The development involved managing a lot of states; e.g. errors, correct words typed, input value, current word, time left, etc. The application was small to use Redux but complex enough to hop for a state management library like Zustand.
+- **Typescript and Tailwind CSS**
 
 
 Building the websites I faced several unprepared issues, including input values acting strangely which I addressed in the [journal](#Journal) section.
 
-The most complex issues I faced while developing this project was keeping the active-words-row in the middle of the word box. After reverse engineering 10fastfingers I seeked help from claude.ai to create me hook, which returns the the row number of the active word. Using that it was fairly easy to hide the previous row making the current row being in center.
+The most complex issue I faced while developing this project was keeping the active word row in the middle of the word box. After reverse engineering 10fastfingers, I sought help from claude.ai to create me hook, which returns the the row number of the active word. It was fairly easy to hide the previous row, making the current row in the center.
 
 ## Journal
 
